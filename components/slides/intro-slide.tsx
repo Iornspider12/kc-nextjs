@@ -20,21 +20,24 @@ const Slide01Intro = ({ isActive }: { isActive: boolean }) => {
       <FloatingBackground particleCount={30} boxCount={6} />
 
       {/* --- Main Content Grid --- */}
-      <div className="relative z-10 w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-[clamp(1.5rem,5vw,6rem)] items-center
+      <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] 
+        gap-[clamp(4rem,10vw,12rem)] items-center
         /* Mobile Padding */
-        p-[clamp(90px,10vh,110px)_clamp(20px,5vw,35px)_clamp(30px,5vh,50px)]
+        p-[clamp(120px,12vh,140px)_clamp(20px,5vw,35px)_clamp(30px,5vh,50px)]
         /* Desktop Padding */
-        lg:pl-[clamp(120px,12vw,180px)] lg:pr-[clamp(60px,6vw,100px)]
+        lg:pl-[clamp(120px,12vw,180px)] lg:pr-[clamp(20px,2vw,40px)] lg:pt-[clamp(100px,10vh,120px)]
       ">
 
+
         {/* LEFT COLUMN: Text */}
-        <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left relative z-20">
           <h1 className="
-            font-bold leading-[0.9] tracking-tight whitespace-normal break-words
+            font-bold leading-[0.9] tracking-tight whitespace-nowrap
             bg-gradient-to-br from-foreground via-primary via-secondary to-accent bg-clip-text text-transparent
             animate-text-pulse
             text-[clamp(2.2rem,8vw,9rem)]
             mb-[clamp(2rem,4vh,4rem)] pb-[0.2em]
+            w-full
           ">
             Revolutionizing<br />
             Shopping
@@ -46,15 +49,17 @@ const Slide01Intro = ({ isActive }: { isActive: boolean }) => {
             text-[clamp(1.1rem,2.8vw,2.8rem)]
             mb-[clamp(1.5rem,2.5vh,2vw)]
             max-w-[90%] lg:max-w-none
+            w-full
           ">
             A Gen AI-Powered, Gamified,<br />
-            Premium and Immersive<br />
+            Premium, Immersive and<br />
             Holistic Experience
           </p>
         </div>
 
         {/* RIGHT COLUMN: Image */}
-        <div className="order-1 lg:order-2 flex justify-center lg:justify-end items-center relative z-10">
+        <div className="order-1 lg:order-2 flex justify-center lg:justify-end items-center relative z-10 
+          max-w-full overflow-visible lg:mr-[-20px]">
           <div className="relative 
             w-[clamp(250px,60vw,350px)] h-[clamp(250px,60vw,350px)]
             md:w-[clamp(350px,42vw,480px)] md:h-[clamp(350px,42vw,480px)]
@@ -63,6 +68,7 @@ const Slide01Intro = ({ isActive }: { isActive: boolean }) => {
             transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]
             hover:scale-105 hover:drop-shadow-[0_15px_40px_rgba(99,102,241,0.4)]
             drop-shadow-[0_10px_30px_rgba(0,0,0,0.3)]
+            shrink-0
           ">
             <Image
               src="/meta human 2 light.webp"

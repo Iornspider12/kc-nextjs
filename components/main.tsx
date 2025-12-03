@@ -75,14 +75,8 @@ const Main = () => {
       }
     };
 
-    // Auto-hide navbar logic: hide after 2 seconds if not on the first slide
-    let hideTimer: NodeJS.Timeout;
-    if (currentSlide > 0) {
-      hideTimer = setTimeout(() => setNavHidden(true), 2000);
-    } else {
-      // eslint-disable-next-line
-      setNavHidden(false);
-    }
+    // Auto-hide navbar logic: hide after 2 seconds on ALL slides
+    const hideTimer = setTimeout(() => setNavHidden(true), 2000);
 
     window.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -93,6 +87,7 @@ const Main = () => {
 
   // --- Handlers ---
   const handleNavHover = () => setNavHidden(false);
+  const handleNavLeave = () => setNavHidden(true);
   const handleEnter = () => setShowEntrance(false);
 
   // --- Render: Entrance ---
@@ -104,9 +99,9 @@ const Main = () => {
   return (
     <div className="relative w-full h-screen bg-background text-foreground overflow-hidden">
 
-      {/* Invisible Hover Area (Top 100px) to reveal navbar */}
+      {/* Invisible Hover Area (Top 60px) to reveal navbar */}
       <div
-        className="fixed top-0 left-0 w-full h-[100px] z-[60]"
+        className="fixed top-0 left-0 w-full h-[60px] z-[60]"
         onMouseEnter={handleNavHover}
         aria-hidden="true"
       />
@@ -117,11 +112,13 @@ const Main = () => {
           ${navHidden ? '-translate-y-full' : 'translate-y-0'}
         `}
         onMouseEnter={handleNavHover}
+        onMouseLeave={handleNavLeave}
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="w-full px-4 h-14 flex items-center justify-between">
+          {/* Left: PanSas Logo */}
           <div className="text-xl font-bold tracking-wider font-mono">PanSas</div>
 
-          {/* Using your existing ModeToggle component */}
+          {/* Right: Theme Toggle */}
           <div className="flex items-center gap-4">
             <ModeToggle />
           </div>

@@ -39,110 +39,104 @@ const REVENUE_STREAMS = [
 ];
 
 const Slide11Revenue: React.FC<SlideProps> = ({ isActive }) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = React.useState(1);
 
-  // Optional: Add horizontal scroll wheel support
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const handleWheel = (evt: WheelEvent) => {
-      if (evt.deltaY !== 0) {
-        evt.preventDefault();
-        container.scrollLeft += evt.deltaY;
-      }
+    const handleResize = () => {
+      const baseWidth = 1600;
+      const baseHeight = 900;
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const newScale = Math.min(scaleX, scaleY, 1.5);
+      setScale(newScale);
     };
 
-    container.addEventListener('wheel', handleWheel, { passive: false });
-    return () => container.removeEventListener('wheel', handleWheel);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
-    <section 
-      id="revenue" 
-      className={`relative w-full h-full bg-background flex flex-col 
+    <section
+      id="revenue"
+      className={`relative w-full h-full bg-background flex flex-col items-center justify-center overflow-hidden
         ${isActive ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}
     >
       <FloatingBackground particleCount={20} boxCount={2} />
 
-      {/* --- Main Content --- */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center
-        pt-[110px] pb-[40px]
-        lg:pt-[130px] lg:pb-[60px]
-      ">
-        
+      {/* --- Scaled Container --- */}
+      <div
+        className="relative z-10 flex flex-col items-center justify-center origin-center"
+        style={{
+          width: '1600px',
+          height: '900px',
+          transform: `scale(${scale})`,
+        }}
+      >
+
         <h2 className="
           text-primary font-bold uppercase tracking-wider text-center
-          text-[clamp(1.5rem,3vw,2.5rem)]
-          mb-[clamp(2rem,4vh,4rem)]
+          text-[40px]
+          mb-[60px]
           animate-text-bootstrap
         ">
           Revenue Model
         </h2>
 
         {/* 
-           --- Horizontal Scroll Container (Desktop) --- 
-           We use a flex container that allows horizontal scrolling on desktop.
-           On mobile, we can switch to vertical scrolling if preferred, 
-           but here I kept the horizontal "Story" feel for consistency with the design.
+           --- Bubbles Container --- 
+           Flex row with negative margins to overlap items and fit them all.
         */}
-        <div 
-          ref={scrollContainerRef}
-          className="
-            w-full flex-1 overflow-x-auto overflow-y-hidden
-            px-[20px] lg:px-[60px]
-            scrollbar-hide cursor-grab active:cursor-grabbing
-          "
-        >
-          <div className="
-            flex items-start gap-[2rem] lg:gap-[4rem]
-            min-w-max /* Forces items to stay in one row */
-            py-10 /* Padding for hover effects */
-            h-full
-          ">
-            
-            {REVENUE_STREAMS.map((item, index) => {
-              // ZigZag Logic: Odd items go down
-              const isEven = index % 2 === 0;
-              
-              return (
-                <div 
-                  key={index}
-                  className={`
-                    relative w-[300px] h-[300px] lg:w-[380px] lg:h-[380px]
-                    rounded-full flex items-center justify-center p-8 text-center
+        <div className="
+          w-full flex justify-center items-start
+          px-[40px]
+        ">
+
+          {REVENUE_STREAMS.map((item, index) => {
+            // ZigZag Logic: Odd indices (1, 3, 5...) go down
+            const isBottom = index % 2 !== 0;
+
+            return (
+              <div
+                key={index}
+                className={`
+                    relative w-[380px] h-[380px]
+                    rounded-full flex items-center justify-center p-10 text-center
                     bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-pink-500/10
                     border border-primary/20 backdrop-blur-md
                     shadow-[0_0_30px_rgba(99,102,241,0.1)]
                     transition-all duration-500 ease-out
                     hover:scale-110 hover:shadow-[0_0_60px_rgba(99,102,241,0.3)] hover:border-primary/50 hover:z-50
                     group
-                    ${!isEven ? 'mt-[150px] lg:mt-[200px]' : 'mt-0'}
+                    ${isBottom ? 'mt-[220px]' : 'mt-0'}
                   `}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {/* Inner Glow Pulse */}
-                  <div className="absolute inset-4 rounded-full border border-white/5 animate-pulse opacity-50 pointer-events-none group-hover:opacity-100" />
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                  marginLeft: index === 0 ? '0px' : '-130px' // Increased negative margin for larger bubbles
+                }}
+              >
+                {/* Inner Glow Pulse */}
+                <div className="absolute inset-4 rounded-full border border-white/5 animate-pulse opacity-50 pointer-events-none group-hover:opacity-100" />
 
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <h3 className="
-                      text-[clamp(1.2rem,1.5vw,1.6rem)] font-bold text-foreground 
+                <div className="relative z-10 flex flex-col gap-4 items-center justify-center">
+                  <h3 className="
+                      text-[26px] font-extrabold text-foreground 
                       group-hover:text-primary transition-colors
+                      leading-tight
                     ">
-                      {item.title}
-                    </h3>
-                    <p className="
-                      text-[clamp(0.9rem,1.1vw,1.1rem)] text-muted-foreground leading-relaxed
-                      group-hover:text-foreground/90 transition-colors
+                    {item.title}
+                  </h3>
+                  <p className="
+                      text-[17px] font-medium text-muted-foreground/90 leading-relaxed
+                      group-hover:text-foreground transition-colors
                     ">
-                      {item.desc}
-                    </p>
-                  </div>
+                    {item.desc}
+                  </p>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
 
-          </div>
         </div>
 
       </div>

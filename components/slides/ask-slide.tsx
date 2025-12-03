@@ -22,6 +22,31 @@ const FUNDS_DATA = [
 ];
 
 const Slide14Ask: React.FC<SlideProps> = ({ isActive }) => {
+  const [scale, setScale] = React.useState(1);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      // Check if mobile (phones)
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      if (!mobile) {
+        const baseWidth = 1600;
+        const baseHeight = 900;
+        const scaleX = window.innerWidth / baseWidth;
+        const scaleY = window.innerHeight / baseHeight;
+        const newScale = Math.min(scaleX, scaleY, 1.5);
+        setScale(newScale);
+      } else {
+        setScale(1);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Chart Data Configuration
   const chartData = {
@@ -65,41 +90,53 @@ const Slide14Ask: React.FC<SlideProps> = ({ isActive }) => {
   return (
     <section
       id="ask"
-      className={`relative w-full h-full bg-background flex flex-col 
-        ${isActive ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}
+      className={`relative w-full h-full bg-background flex flex-col items-center justify-center
+        ${isActive ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000
+        ${!isMobile ? 'overflow-hidden' : 'overflow-y-auto overflow-x-hidden'}
+      `}
     >
       <FloatingBackground particleCount={20} boxCount={2} />
 
-      <div className="relative z-10 w-full h-full flex flex-col items-center overflow-hidden
-        pt-[110px] pb-[40px] px-[20px]
-        lg:pt-[130px] lg:px-[60px] lg:pb-[60px]
-      ">
+      {/* 
+         --- Scaled Container ---
+         On Desktop: Fixed 1600x900 scaled
+         On Mobile: Fluid width/height
+      */}
+      <div
+        className={`
+          relative z-10 flex flex-col items-center
+          ${!isMobile ? 'justify-center origin-center' : 'w-full px-4 py-20'}
+        `}
+        style={!isMobile ? {
+          width: '1600px',
+          height: '900px',
+          transform: `scale(${scale})`,
+        } : {}}
+      >
 
         {/* Title */}
-        <h2 className="
+        <h2 className={`
           text-primary font-bold uppercase tracking-wider text-center
-          text-[clamp(2.5rem,4vw,3.5rem)]
-          mb-[clamp(1rem,3vh,3rem)]
           animate-text-bootstrap
-        ">
+          ${!isMobile ? 'text-[40px] mb-[40px]' : 'text-3xl mb-10'}
+        `}>
           Ask
         </h2>
 
         {/* --- Main Content Card --- */}
-        <div className="
-          w-full max-w-[1400px] flex-1
-          flex flex-col
+        <div className={`
+          w-full flex flex-col
           bg-gradient-to-br from-indigo-500/10 to-violet-500/5
           border-2 border-indigo-500/30 rounded-3xl backdrop-blur-xl
           shadow-[0_20px_40px_rgba(0,0,0,0.2)]
-          p-[clamp(1.5rem,3vw,3rem)]
-        ">
+          ${!isMobile ? 'max-w-[1400px] p-[50px]' : 'p-6'}
+        `}>
 
           {/* Subtitle */}
-          <h3 className="
-            text-[clamp(2rem,4vw,3.5rem)] font-black text-center text-foreground
-            mb-8 lg:mb-12
-          ">
+          <h3 className={`
+            font-black text-center text-foreground
+            ${!isMobile ? 'text-[50px] mb-12' : 'text-3xl mb-8'}
+          `}>
             $2.8M-Angel Round
           </h3>
 
@@ -108,24 +145,33 @@ const Slide14Ask: React.FC<SlideProps> = ({ isActive }) => {
              Mobile: Vertical Stack
              Desktop: Two Columns (Chart Left, Legend Right)
           */}
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 flex-1">
+          <div className={`
+            flex items-center justify-center w-full
+            ${!isMobile ? 'flex-row gap-16' : 'flex-col gap-8'}
+          `}>
 
             {/* Chart Side */}
-            <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
+            <div className={`
+              relative flex items-center justify-center
+              ${!isMobile ? 'w-[500px] h-[500px]' : 'w-full max-w-[350px] aspect-square'}
+            `}>
               <Doughnut data={chartData} options={chartOptions} />
 
               {/* Center Text (Total Amount) */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="text-center">
-                  <div className="text-3xl lg:text-4xl font-black text-white">$2.8M</div>
+                  <div className={`font-black text-white ${!isMobile ? 'text-4xl' : 'text-3xl'}`}>$2.8M</div>
                   <div className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Total</div>
                 </div>
               </div>
             </div>
 
             {/* Legend Side */}
-            <div className="w-full flex-1 flex flex-col justify-center">
-              <h4 className="text-2xl font-bold text-center lg:text-left mb-6 text-foreground">
+            <div className={`
+              flex flex-col justify-center
+              ${!isMobile ? 'w-[600px]' : 'w-full'}
+            `}>
+              <h4 className="text-2xl font-bold text-center mb-6 text-foreground">
                 Use of Funds
               </h4>
 
@@ -134,16 +180,17 @@ const Slide14Ask: React.FC<SlideProps> = ({ isActive }) => {
                   <div
                     key={index}
                     className={`
-                      flex justify-between items-center p-4 lg:p-5 rounded-xl
+                      flex justify-between items-center rounded-xl
                       ${item.bg} border-l-[6px] ${item.border}
                       transition-transform duration-300 hover:scale-[1.02] hover:bg-opacity-20
+                      ${!isMobile ? 'p-5' : 'p-4'}
                     `}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <span className="text-[1.1rem] lg:text-[1.4rem] font-bold text-foreground">
+                    <span className={`font-bold text-foreground ${!isMobile ? 'text-[1.4rem]' : 'text-[1.1rem]'}`}>
                       {item.label}
                     </span>
-                    <span className="text-[1rem] lg:text-[1.3rem] font-medium text-muted-foreground">
+                    <span className={`font-medium text-muted-foreground ${!isMobile ? 'text-[1.3rem]' : 'text-[1rem]'}`}>
                       {item.amount} <span className="opacity-60 ml-1">({item.value}%)</span>
                     </span>
                   </div>

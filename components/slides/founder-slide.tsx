@@ -20,17 +20,17 @@ const Slide02Founder: React.FC<SlideProps> = ({ isActive }) => {
     }, 0);
   }, []);
 
-  const amazonLogoSrc = mounted && resolvedTheme === 'light' 
-    ? "/company_logo/Amazon_light.webp" 
+  const amazonLogoSrc = mounted && resolvedTheme === 'light'
+    ? "/company_logo/Amazon_light.webp"
     : "/company_logo/Amazon_dark.webp";
 
   return (
-    <section 
-      id="founder" 
+    <section
+      id="founder"
       className={`relative w-full h-full bg-background flex flex-col 
         ${isActive ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}
     >
-      
+
       {/* --- Background Elements --- */}
       <div className="absolute top-[-20%] left-[-20%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[120px] animate-pulse pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-20%] w-[50%] h-[50%] rounded-full bg-secondary/20 blur-[120px] animate-pulse delay-1000 pointer-events-none" />
@@ -49,7 +49,7 @@ const Slide02Founder: React.FC<SlideProps> = ({ isActive }) => {
         pt-[110px] pb-[50px] px-[20px]
         lg:p-[clamp(40px,5vw,80px)]
       ">
-        
+
         {/* --- LEFT: CEO Image --- */}
         <div className="flex-shrink-0 relative group order-1">
           <div className="relative 
@@ -73,9 +73,9 @@ const Slide02Founder: React.FC<SlideProps> = ({ isActive }) => {
         </div>
 
         {/* --- RIGHT: Content --- */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-[1400px] order-2 w-full px-2 lg:px-0 my-auto">
-          
-          <h2 className="text-primary font-bold uppercase tracking-wider mb-2 text-xs md:text-sm lg:text-base">
+        <div className="flex flex-col items-center text-center max-w-[1400px] order-2 w-full px-2 lg:px-0 my-auto">
+
+          <h2 className="text-primary font-bold uppercase tracking-wider mb-2 text-base md:text-lg lg:text-xl">
             Founder and CEO
           </h2>
 
@@ -110,26 +110,26 @@ const Slide02Founder: React.FC<SlideProps> = ({ isActive }) => {
           */}
           <div className="
             w-full flex flex-col md:flex-row flex-wrap gap-4 
-            items-stretch justify-center lg:justify-start
+            items-stretch justify-center
           ">
-            
-            <ExperienceCard 
-              logo="/company_logo/google.webp" 
-              logoClass="w-[90px] md:w-[110px]"
+
+            <ExperienceCard
+              logo="/company_logo/google.webp"
+              logoClass="h-[35px] md:h-[45px] w-auto"
               title="Head of Product and Eng"
               subtitle="Pixel Ecosystem"
             />
 
-            <ExperienceCard 
+            <ExperienceCard
               logo={amazonLogoSrc}
-              logoClass="w-[110px] md:w-[130px]"
+              logoClass="h-[45px] md:h-[55px] w-auto"
               title="Sr Management • Tech PMO"
               subtitle="FireTV and Kindle"
             />
 
-            <ExperienceCard 
-              logo="/company_logo/Apple_Logo.webp" 
-              logoClass="w-[80px] md:w-[90px]"
+            <ExperienceCard
+              logo="/company_logo/Apple_Logo.webp"
+              logoClass="h-[48px] md:h-[58px] w-auto"
               title="Mid Management • Systems"
               subtitle="Eng iPhone and iPad"
             />
@@ -160,12 +160,12 @@ const ExperienceCard = ({ logo, logoClass, title, subtitle }: { logo: string, lo
     hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(99,102,241,0.15)]
     hover:from-indigo-500/15 hover:to-pink-500/15
   ">
-    {/* Logo Area: Fixed height container to keep logos aligned */ }
-    <div className="h-[60px] w-full flex items-center justify-center mb-3">
-       <img src={logo} alt="Company Logo" className={`object-contain max-h-full ${logoClass}`} draggable={false} />
+    {/* Logo Area: Fixed height container to keep logos aligned */}
+    <div className="h-[80px] w-full flex items-center justify-center mb-3">
+      <img src={logo} alt="Company Logo" className={`object-contain max-h-full ${logoClass}`} draggable={false} />
     </div>
-    
-    {/* Text Area: Auto height */ }
+
+    {/* Text Area: Auto height */}
     <div className="text-center w-full flex flex-col justify-center">
       <div className="text-sm md:text-base text-muted-foreground font-bold leading-tight group-hover:text-foreground transition-colors mb-1">
         {title}

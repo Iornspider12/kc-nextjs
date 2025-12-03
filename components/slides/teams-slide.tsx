@@ -28,12 +28,12 @@ const teamMembers: TeamMember[] = [
 
 const Slide03Team: React.FC<SlideProps> = ({ isActive }) => {
   return (
-    <section 
-      id="team" 
+    <section
+      id="team"
       className={`relative w-full h-full bg-background flex flex-col 
         ${isActive ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}
     >
-      
+
       {/* --- Background Elements --- */}
       <div className="absolute top-[-20%] left-[-20%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[120px] animate-pulse pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-20%] w-[50%] h-[50%] rounded-full bg-secondary/20 blur-[120px] animate-pulse delay-1000 pointer-events-none" />
@@ -48,7 +48,7 @@ const Slide03Team: React.FC<SlideProps> = ({ isActive }) => {
         pt-[110px] pb-[50px] px-[20px]
         lg:pt-[130px] lg:px-[60px] lg:pb-[60px]
       ">
-        
+
         {/* Title */}
         <h2 className="
           relative z-20
@@ -70,14 +70,14 @@ const Slide03Team: React.FC<SlideProps> = ({ isActive }) => {
         <div className="
           w-full max-w-[1400px]
           grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4
-          gap-x-[clamp(1rem,2vw,2rem)] gap-y-[clamp(2rem,4vh,3.5rem)]
+          gap-x-[clamp(1rem,2vw,3rem)] gap-y-[clamp(1.5rem,3vh,3rem)]
           justify-items-center
         ">
           {teamMembers.map((member, index) => (
-            <TeamMemberCard 
-              key={index} 
-              member={member} 
-              index={index} 
+            <TeamMemberCard
+              key={index}
+              member={member}
+              index={index}
             />
           ))}
         </div>
@@ -90,7 +90,7 @@ const Slide03Team: React.FC<SlideProps> = ({ isActive }) => {
 // --- Sub-Component: Individual Card ---
 const TeamMemberCard = ({ member, index }: { member: TeamMember, index: number }) => {
   return (
-    <div 
+    <div
       className="flex flex-col items-center gap-3 w-full max-w-[280px] group cursor-pointer transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2"
     >
       {/* Profile Circle with Gradient Border */}
@@ -107,23 +107,23 @@ const TeamMemberCard = ({ member, index }: { member: TeamMember, index: number }
 
       {/* Text Info */}
       <div className="text-center flex flex-col gap-1 w-full px-1">
-        
+
         {/* Name */}
-        <h3 
+        <h3
           className="font-bold text-foreground leading-tight animate-text-pulse text-[clamp(1rem,2.8vw,1.4rem)]"
           style={{ animationDelay: `${index * 0.2}s` }}
         >
           {member.name}
         </h3>
-        
+
         {/* Position */}
-        <div 
+        <div
           className="font-semibold text-muted-foreground leading-tight animate-text-bootstrap text-[clamp(0.85rem,2.2vw,1rem)]"
           style={{ animationDelay: `${0.1 + (index * 0.2)}s` }}
         >
           {member.position}
         </div>
-        
+
         {/* Credentials */}
         <div className="font-medium text-muted-foreground/70 leading-tight text-[clamp(0.75rem,2vw,0.9rem)]">
           {member.credentials}

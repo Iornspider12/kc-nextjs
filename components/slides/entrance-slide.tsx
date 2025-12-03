@@ -130,7 +130,7 @@ const Slide00Entrance: React.FC<EntranceProps> = ({ onEnter }) => {
 
         {/* Title Container */}
         <h1 className="flex items-baseline justify-center flex-nowrap
-          mb-[clamp(2rem,6vh,5rem)] mt-[clamp(-60px,-10vh,-180px)] 
+          mb-[clamp(3rem,8vh,7rem)] mt-[clamp(-60px,-10vh,-180px)] 
           drop-shadow-[0_10px_40px_rgba(99,102,241,0.3)]
           max-w-[100vw]"
         >
@@ -139,7 +139,7 @@ const Slide00Entrance: React.FC<EntranceProps> = ({ onEnter }) => {
           <img
             className={`cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] 
               origin-center animate-glow-pulse
-              h-[clamp(200px,35vw,500px)] 
+              h-[clamp(240px,42vw,600px)] 
               ${getQClasses()}`}
             src="/logo/Q.webp"
             alt="Q"
@@ -151,7 +151,7 @@ const Slide00Entrance: React.FC<EntranceProps> = ({ onEnter }) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <div className={`relative flex items-center justify-center
               transition-all duration-300 ease-out
-              h-[clamp(180px,30vw,450px)]
+              h-[clamp(216px,36vw,540px)]
               ${qClicks > 0 ? 'translate-x-5' : ''}
               z-50`}
           >
@@ -174,7 +174,7 @@ const Slide00Entrance: React.FC<EntranceProps> = ({ onEnter }) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className={`cursor-pointer transition-all duration-300 ease-out 
-              h-[clamp(180px,30vw,450px)] ml-[clamp(-10px,-1.5vw,-15px)]
+              h-[clamp(216px,36vw,540px)] ml-[clamp(-10px,-1.5vw,-15px)]
               ${qClicks > 0 ? 'translate-x-[clamp(10px,2vw,20px)]' : ''}
               ${aClicks > 0 ? 'brightness-150' : ''}
               relative z-50`}
@@ -188,7 +188,7 @@ const Slide00Entrance: React.FC<EntranceProps> = ({ onEnter }) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className={`transition-all duration-300 ease-out 
-                h-[clamp(180px,30vw,450px)]
+                h-[clamp(216px,36vw,540px)]
               ${qClicks > 0 ? 'translate-x-[clamp(10px,2vw,20px)]' : ''}`}
             src="/logo/NTA.webp"
             alt="NTA"
@@ -202,8 +202,8 @@ const Slide00Entrance: React.FC<EntranceProps> = ({ onEnter }) => {
             onClick={buttonEnabled ? onEnter : undefined}
             disabled={!buttonEnabled}
             className={`
-              px-[clamp(2.5rem,5vw,4rem)] py-[clamp(1rem,2vh,1.5rem)]
-              text-[clamp(1rem,1.8vw,1.5rem)] font-bold uppercase tracking-[clamp(1px,0.2vw,2px)]
+              px-[clamp(1.8rem,4vw,3rem)] py-[clamp(0.7rem,1.5vh,1.1rem)]
+              text-[clamp(0.85rem,1.5vw,1.2rem)] font-bold uppercase tracking-[clamp(1px,0.2vw,2px)]
               text-white rounded-full border-none transition-all duration-400 ease-out
               shadow-[0_10px_40px_rgba(99,102,241,0.3)]
               ${buttonEnabled
