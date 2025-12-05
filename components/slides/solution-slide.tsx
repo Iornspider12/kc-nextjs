@@ -77,8 +77,8 @@ const Slide06Solution: React.FC<SlideProps> = ({ isActive }) => {
 
           {/* --- CENTRAL META HUMAN --- */}
           <div className="
-            absolute left-1/2 -translate-x-1/2 top-[120px] 
-            w-[500px] h-[700px]
+            absolute left-1/2 -translate-x-1/2 top-[200px] 
+            w-[420px] h-[600px]
             z-10
             animate-human-float
           ">
@@ -99,7 +99,7 @@ const Slide06Solution: React.FC<SlideProps> = ({ isActive }) => {
             icon="🤖"
             title="Your Cosmic GenAI Genie"
             description="Our AI-powered genie delivers instant answers, smooth navigation, transparent pricing, and hyper-personalized journeys."
-            positionClass="top-[140px] left-[200px]"
+            positionClass="top-[150px] left-[320px]"
             delay={0}
           />
 
@@ -108,7 +108,7 @@ const Slide06Solution: React.FC<SlideProps> = ({ isActive }) => {
             icon="🎮"
             title="Gamified Social Shopping Engine"
             description="Turn static sites into shared adventures with rewards, group buys, and live co-shopping."
-            positionClass="top-[320px] left-[0px]"
+            positionClass="top-[280px] left-[80px]"
             delay={0.6}
           />
 
@@ -117,7 +117,7 @@ const Slide06Solution: React.FC<SlideProps> = ({ isActive }) => {
             icon="🔐"
             title="QiD: Your Data. Your Rules!"
             description="Quantum-secure identity puts users in full control—unbreakable encryption, zero data trading."
-            positionClass="bottom-[50px] left-[200px]"
+            positionClass="bottom-[80px] left-[320px]"
             delay={1.2}
           />
 
@@ -128,7 +128,7 @@ const Slide06Solution: React.FC<SlideProps> = ({ isActive }) => {
             icon="🏠"
             title='"Hack Me" - Bring home any product'
             description="Our genie auto-buys at drops and bargains for you—reviving the thrill of shopping."
-            positionClass="top-[140px] right-[150px]"
+            positionClass="top-[150px] right-[320px]"
             delay={0.3}
           />
 
@@ -137,7 +137,7 @@ const Slide06Solution: React.FC<SlideProps> = ({ isActive }) => {
             icon="🛡️"
             title="Seller's Shield – Unmatched Protection"
             description="A first-of-its-kind insurance shields sellers from fraud and abusive returns."
-            positionClass="top-[320px] right-[0px]"
+            positionClass="top-[280px] right-[80px]"
             delay={0.9}
           />
 
@@ -146,7 +146,7 @@ const Slide06Solution: React.FC<SlideProps> = ({ isActive }) => {
             icon="🥽"
             title="Immersive and holistic xR experience"
             description="Gamified 3D and virtual storefronts let customers explore products anywhere, anytime."
-            positionClass="bottom-[50px] right-[150px]"
+            positionClass="bottom-[80px] right-[320px]"
             delay={1.5}
           />
 
@@ -182,11 +182,10 @@ const FeatureOrb = ({ icon, title, description, positionClass, delay }: FeatureO
         border-[2px] border-indigo-500/30 backdrop-blur-xl shadow-[0_8px_32px_rgba(99,102,241,0.15)]
         
         /* Animation & Interaction */
-        animate-orb-float cursor-pointer transition-all duration-500 ease-out group
+        cursor-pointer transition-all duration-500 ease-out group
         hover:scale-110 hover:-translate-y-4 hover:border-amber-500/80 hover:shadow-[0_0_60px_rgba(245,158,11,0.4)]
         hover:z-50
       `}
-      style={{ animationDelay: `${delay}s` }}
     >
 
       {/* ::before Reflection Effect */}

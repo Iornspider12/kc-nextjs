@@ -82,23 +82,26 @@ const Slide08Market: React.FC<SlideProps> = ({ isActive }) => {
           w-full max-w-[1600px]
           grid grid-cols-[350px_1fr_350px]
           items-center gap-8
+          animate-layout-breathe
         ">
 
           {/* --- LEFT STATS --- */}
-          <div className="flex flex-col gap-[100px] justify-center h-full pl-[50px]">
-            <StatBlock
-              icon={Globe}
-              value="$17T"
-              label="Available Market"
-              color="text-[#3b5998]"
-              bg="bg-[#3b5998]/15"
-              border="border-[#3b5998]"
-              delay={0.2}
-            />
+          <div className="flex flex-col gap-[140px] justify-center h-full pl-[100px] -mt-[80px]">
+            <div className="-mt-[30px]">
+              <StatBlock
+                icon={Globe}
+                value="$17T"
+                label="Total Addressable Market"
+                color="text-[#3b5998]"
+                bg="bg-[#3b5998]/15"
+                border="border-[#3b5998]"
+                delay={0.2}
+              />
+            </div>
             <StatBlock
               icon={MapPin}
               value="$180B"
-              label="Obtainable Market"
+              label="Serviceable Obtainable Market"
               color="text-[#d65369]"
               bg="bg-[#d65369]/15"
               border="border-[#d65369]"
@@ -119,15 +122,20 @@ const Slide08Market: React.FC<SlideProps> = ({ isActive }) => {
               bg-gradient-to-br from-[#4a5f9d] via-[#3b5998] to-[#2d4373]
               border-[4px] border-indigo-500/40
               shadow-[0_25px_60px_rgba(59,89,152,0.3),inset_0_4px_20px_rgba(255,255,255,0.1)]
-              z-10 animate-layout-breathe
+              z-10
             "
               style={{ borderRadius: '48% 52% 58% 42% / 45% 50% 50% 55%' }}
             >
+              {/* Line from TAM to left stat */}
+              <div className="absolute left-[80px] top-[80px] w-[210px] h-[2px] -translate-x-full bg-[#3b5998]" />
+              <div className="absolute left-[80px] top-[80px] w-[8px] h-[8px] -translate-y-1/2 rounded-full bg-[#3b5998]" />
+              
               <span className="absolute top-[50px] text-white font-black text-[50px] drop-shadow-md">TAM</span>
 
               {/* 2. SAM - Middle Blob (Orange) */}
               <div className="
-                relative flex flex-col justify-center items-center
+                absolute bottom-0
+                flex flex-col justify-center items-center
                 w-[85%] h-[75%]
                 bg-gradient-to-br from-[#e89b7a] via-[#d47b55] to-[#bf6842]
                 border-[3px] border-[#d47b55]/50
@@ -136,11 +144,15 @@ const Slide08Market: React.FC<SlideProps> = ({ isActive }) => {
               "
                 style={{ borderRadius: '46% 54% 56% 44% / 48% 45% 55% 52%' }}
               >
+                {/* Line from SAM to right stat */}
+                <div className="absolute right-[60px] top-[70px] w-[240px] h-[2px] translate-x-full bg-[#d47b55]" />
+                <div className="absolute right-[60px] top-[70px] w-[8px] h-[8px] -translate-y-1/2 rounded-full bg-[#d47b55]" />
+                
                 <span className="absolute top-[45px] text-white font-black text-[40px] drop-shadow-md">SAM</span>
 
                 {/* 3. SOM - Innermost Blob (Red) */}
                 <div className="
-                  absolute bottom-[5%]
+                  absolute bottom-0
                   flex items-center justify-center
                   w-[70%] h-[60%]
                   bg-gradient-to-br from-[#e87a8f] via-[#d65369] to-[#c43d52]
@@ -150,6 +162,10 @@ const Slide08Market: React.FC<SlideProps> = ({ isActive }) => {
                 "
                   style={{ borderRadius: '48% 52% 55% 45% / 50% 45% 55% 50%' }}
                 >
+                  {/* Line from SOM to left bottom stat */}
+                  <div className="absolute left-[60px] top-[50px] w-[323px] h-[2px] -translate-x-full bg-[#d65369]" />
+                  <div className="absolute left-[60px] top-[50px] w-[8px] h-[8px] -translate-y-1/2 rounded-full bg-[#d65369]" />
+                  
                   <span className="text-white font-black text-[30px] drop-shadow-md">SOM</span>
                 </div>
               </div>
@@ -157,11 +173,11 @@ const Slide08Market: React.FC<SlideProps> = ({ isActive }) => {
           </div>
 
           {/* --- RIGHT STATS --- */}
-          <div className="flex flex-col gap-[100px] justify-center h-full pr-[50px]">
+          <div className="flex flex-col gap-[140px] justify-center h-full pr-[100px] mt-[80px]">
             <StatBlock
               icon={Target}
               value="$6T"
-              label="Available Market"
+              label="Serviceable Addressable Market"
               color="text-[#d47b55]"
               bg="bg-[#d47b55]/15"
               border="border-[#d47b55]"
@@ -191,23 +207,22 @@ interface StatBlockProps {
 
 const StatBlock = ({ icon: Icon, value, label, color, bg, border, delay }: StatBlockProps) => (
   <div
-    className="flex items-center gap-6 animate-text-bootstrap group cursor-default"
-    style={{ animationDelay: `${delay}s` }}
+    className={`flex items-center gap-3 group cursor-default px-2 py-3 rounded-xl border-2 ${border} ${bg} backdrop-blur-sm shadow-lg`}
   >
     <div className={`
-      flex-shrink-0 w-[80px] h-[80px] 
+      flex-shrink-0 w-[70px] h-[70px] 
       flex items-center justify-center 
       rounded-full border-2 ${bg} ${border}
       transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12
     `}>
-      <Icon className={`w-[40px] h-[40px] ${color.replace('text-', 'stroke-')}`} strokeWidth={2.5} />
+      <Icon className={`w-[35px] h-[35px] ${color.replace('text-', 'stroke-')}`} strokeWidth={2.5} />
     </div>
 
     <div className="flex flex-col">
-      <div className={`text-[60px] font-black leading-none ${color} drop-shadow-sm`}>
+      <div className={`text-[50px] font-black leading-none ${color} drop-shadow-sm`}>
         {value}
       </div>
-      <div className="text-foreground font-bold text-[20px] leading-tight opacity-90">
+      <div className="text-foreground font-bold text-[18px] leading-tight opacity-90">
         {label}
       </div>
     </div>
